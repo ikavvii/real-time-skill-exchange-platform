@@ -2,6 +2,8 @@ const express = require('express')
 const cors = require('cors')
 const connectDB = require('./config/database')
 require('dotenv').config()
+const userRoutes = require('./routes/userRoutes')
+const requestRoutes = require('./routes/requestRoutes')
 
 const app = express()
 
@@ -16,5 +18,9 @@ app.use(express.json())
 app.get('/', (req, res) => {
   res.send('SkillSync backend is running!')
 })
+
+// Routes
+app.use('/api/users', userRoutes)
+app.use('/api/requests', requestRoutes)
 
 module.exports = app

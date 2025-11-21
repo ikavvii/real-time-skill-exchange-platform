@@ -1,21 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import { API_BASE } from './config';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Navbar from './components/Navbar'
+import Home from './pages/Home'
+import Register from './pages/Register'
+import Login from './pages/Login'
+import Profile from './pages/Profile'
+import Requests from './pages/Requests'
+import ChatRoom from './pages/ChatRoom'
 
 function App() {
-  const [backendMessage, setBackendMessage] = useState('');
-
-  useEffect(() => {
-    fetch(`${API_BASE}/`)
-      .then(res => res.text())
-      .then(data => setBackendMessage(data));
-  }, []);
-
   return (
-    <div style={{ padding: '2rem', textAlign: 'center' }}>
-      <h1>SkillSync Frontend</h1>
-      <p>Backend says: {backendMessage}</p>
-    </div>
-  );
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/requests" element={<Requests />} />
+        <Route path="/chat/:requestId" element={<ChatRoom />} />
+      </Routes>
+    </Router>
+  )
 }
 
-export default App;
+export default App
